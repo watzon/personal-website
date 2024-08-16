@@ -1,33 +1,12 @@
-<script>
+<script lang="ts">
+	import type { Post } from '$lib/types';
+  import { formatDate } from '$lib/utils';
   import { onMount } from "svelte";
 
-  let recentArticles = $state([
-    {
-      date: "08/14/2024",
-      title: "Optimizing React Applications for Performance",
-      link: "/blog/optimizing-react-applications",
-    },
-    {
-      date: "08/01/2024",
-      title: "The Future of TypeScript: What's Coming in 5.0",
-      link: "/blog/typescript-5-preview",
-    },
-    {
-      date: "07/15/2024",
-      title: "Building Scalable Microservices with Go",
-      link: "/blog/scalable-microservices-go",
-    },
-    {
-      date: "07/01/2024",
-      title: "Mastering CSS Grid: Advanced Layout Techniques",
-      link: "/blog/mastering-css-grid",
-    },
-    {
-      date: "06/15/2024",
-      title: "Serverless Architecture: Pros, Cons, and Best Practices",
-      link: "/blog/serverless-architecture-guide",
-    },
-  ]);
+  const props = $props();
+  const { posts = [] }: { posts: Post[] } = props.data;
+
+  console.log(posts);
 
   let highlightedProjects = $state([
     {
@@ -68,7 +47,7 @@
   <section class="bg-gray-800 p-6 rounded-lg">
     <div class="flex items-start space-x-4">
       <img
-        src="/path/to/your/avatar.jpg"
+        src="/images/avatar.jpg"
         alt="Chris Watson"
         class="w-20 h-20 rounded-full"
       />
@@ -78,8 +57,8 @@
           Senior Software Engineer - Salt Lake City, UT
         </p>
         <p class="text-sm mb-4">
-          I'm Chris Watson, a seasoned software engineer, conference speaker,
-          and avid blogger focused on creating efficient, scalable, and
+          I'm Chris Watson, a seasoned software engineer, 3d printing content creator,
+          and lover of open source focused on creating efficient, scalable, and
           user-friendly web applications. With over a decade of experience, I
           specialize in full-stack development and performance optimization.
         </p>
@@ -98,11 +77,11 @@
   <section>
     <h2 class="text-2xl font-bold mb-4">Recent Articles</h2>
     <ul class="space-y-2">
-      {#each recentArticles as article}
+      {#each posts as post}
         <li>
-          <span class="text-gray-500">{article.date}</span> -
-          <a href={article.link} class="text-teal-400 hover:underline"
-            >{article.title}</a
+          <span class="text-gray-500">{formatDate(post.date)}</span> -
+          <a href={post.link} class="text-teal-400 hover:underline"
+            >{post.title}</a
           >
         </li>
       {/each}

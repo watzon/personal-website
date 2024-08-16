@@ -1,9 +1,14 @@
 ---
-layout: blog
 title: Facilitating Postgres database migration
-date: 2023-10-18T13:39:00.000Z
+tags:
+  - databases
+  - devops
+  - servers
+  - postgres
+date: 2023-10-18T00:01:39.322Z
 thumbnail: /images/uploads/facilitating-postgres-database-migration.jpg
 ---
+
 On the back of today's other post about [migrating your redis database across servers](/posts/migrating-your-redis-database-to-another-server/) I thought it only made sense to talk about migrating your Postgres database as well, seeing as I migrated my Postgres database for my [Firefish](https://joinfirefish.org) instance as well.
 
 ## Postgres' built-in migration tool
