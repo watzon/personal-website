@@ -129,8 +129,8 @@
       <a href="https://github.com/watzon" class="text-teal-400 hover:underline"
         >GitHub</a
       >
-      <a href="https://twitter.com/watzon" class="text-teal-400 hover:underline"
-        >Twitter</a
+      <a href="https://watzonmanor.com/@watzon" class="text-teal-400 hover:underline"
+        >Mastodon</a
       >
       <a
         href="https://linkedin.com/in/watzon1993"
