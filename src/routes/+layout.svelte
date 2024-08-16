@@ -11,10 +11,6 @@
     }
 </script>
 
-<svelte:head>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</svelte:head>
-
 <div class={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-300' : 'bg-gray-100 text-gray-800'}`}>
     <div class="max-w-screen-lg mx-auto px-4">
         <header class="py-6">
