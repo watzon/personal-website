@@ -44,7 +44,7 @@
 </script>
 
 <div class="space-y-8">
-  <section class="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg">
+  <section class="bg-neutral-300 dark:bg-gray-800 p-6 rounded-lg">
     <div class="flex items-start space-x-4">
       <img
         src="/images/avatar.jpg"
