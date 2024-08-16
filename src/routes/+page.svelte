@@ -31,31 +31,31 @@
 
   let highlightedProjects = $state([
     {
-      name: "DevFlow",
-      description: "An AI-powered development workflow optimization tool",
-      link: "https://github.com/watzon/devflow",
+      name: "Cadmium",
+      description: "NLP (natural language processing) library for Crystal",
+      link: "https://github.com/cadmiumcr/cadmium",
     },
     {
-      name: "ReactiveUI",
+      name: "Crecto",
       description:
-        "A lightweight, reactive UI library for modern web applications",
-      link: "https://github.com/watzon/reactiveui",
+        "Ecto like ORM for Crystal with support for PostgreSQL, MySQL, and SQLite",
+      link: "https://github.com/Crecto/crecto",
     },
     {
-      name: "GoMicro",
+      name: "Tourmaline",
       description:
-        "A Go-based microservices framework with built-in service discovery",
-      link: "https://github.com/watzon/gomicro",
+        "Crystal based Telegram Bot framework",
+      link: "https://github.com/protoncr/tourmaline",
     },
     {
-      name: "TypeSafe",
-      description: "A runtime type-checking library for JavaScript",
-      link: "https://github.com/watzon/typesafe",
+      name: "Paste69",
+      description: "Fast, efficient, and minimalist pastebin service",
+      link: "https://github.com/watzon/paste69",
     },
     {
-      name: "CloudScale",
-      description: "An auto-scaling solution for containerized applications",
-      link: "https://github.com/watzon/cloudscale",
+      name: "WSL Proxy",
+      description: "WSL proxy files for editor/linux interop",
+      link: "https://github.com/watzon/wsl-proxy",
     },
   ]);
 
