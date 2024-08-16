@@ -95,7 +95,7 @@
       Senior Software Engineer • Salt Lake City, UT
     </h4>
     <p class="!text-sm !mb-12">
-      <a href="mailto:chris@watzon.tech" class="text-teal-400 hover:underline"
+      <a href="mailto:chris@watzon.tech" class="text-teal-600 dark:text-teal-400 hover:underline"
         >chris@watzon.tech</a
       >
       •
@@ -103,14 +103,14 @@
         href="https://linkedin.com/in/watzon1993"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-teal-400 hover:underline">LinkedIn</a
+        class="text-teal-600 dark:text-teal-400 hover:underline">LinkedIn</a
       >
       •
       <a
         href="https://github.com/watzon"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-teal-400 hover:underline">GitHub</a
+        class="text-teal-600 dark:text-teal-400 hover:underline">GitHub</a
       >
     </p>
   </section>
@@ -127,7 +127,7 @@
   <section>
     <div class="flex flex-wrap gap-2 justify-center">
       {#each skills as skill}
-        <span class="bg-gray-700 text-teal-400 px-2 py-1 rounded text-lg"
+        <span class="bg-gray-700 text-teal-600 dark:text-teal-400 px-2 py-1 rounded text-lg"
           >{skill}</span
         >
       {/each}

@@ -11,7 +11,7 @@
 <ul class="space-y-4">
   {#each posts as post}
     <li class="border-b border-gray-700 pb-4">
-      <a href={post.link} class="text-xl text-teal-400 hover:underline"
+      <a href={post.link} class="text-xl text-teal-600 dark:text-teal-400 hover:underline"
         >{post.title}</a
       >
       <p class="text-sm text-gray-500 mt-1">{formatDate(post.date)}</p>

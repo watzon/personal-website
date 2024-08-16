@@ -35,7 +35,7 @@
   <!-- Tags -->
   <div class="tags space-x-2">
     {#each data.meta.tags as tag}
-      <span class="!text-teal-400">&num;{tag}</span>
+      <span class="!text-teal-600 dark:text-teal-400">&num;{tag}</span>
     {/each}
   </div>
 

@@ -44,7 +44,7 @@
 </script>
 
 <div class="space-y-8">
-  <section class="bg-gray-800 p-6 rounded-lg">
+  <section class="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg">
     <div class="flex items-start space-x-4">
       <img
         src="/images/avatar.jpg"
@@ -53,7 +53,7 @@
       />
       <div>
         <h1 class="text-2xl font-bold mb-2">Chris Watson (Watzon)</h1>
-        <p class="text-xl text-teal-400 mb-2">
+        <p class="text-xl text-teal-600 dark:text-teal-400 mb-2">
           Senior Software Engineer - Salt Lake City, UT
         </p>
         <p class="text-sm mb-4">
@@ -66,7 +66,7 @@
           I'm passionate about sharing knowledge and regularly write about
           software development on my <a
             href="/blog"
-            class="text-teal-400 hover:underline">blog</a
+            class="text-teal-600 dark:text-teal-400 hover:underline">blog</a
           >. When I'm not coding, you can find me exploring new technologies or
           contributing to open-source projects.
         </p>
@@ -80,7 +80,7 @@
       {#each posts as post}
         <li>
           <span class="text-gray-500">{formatDate(post.date)}</span> -
-          <a href={post.link} class="text-teal-400 hover:underline"
+          <a href={post.link} class="text-teal-600 dark:text-teal-400 hover:underline"
             >{post.title}</a
           >
         </li>
@@ -93,7 +93,7 @@
     <ul class="space-y-2">
       {#each highlightedProjects as project}
         <li>
-          <a href={project.link} class="text-teal-400 hover:underline"
+          <a href={project.link} class="text-teal-600 dark:text-teal-400 hover:underline"
             >{project.name}</a
           >
           - {project.description}
@@ -105,18 +105,18 @@
   <section>
     <h2 class="text-2xl font-bold mb-4">Quick Links</h2>
     <div class="flex flex-wrap gap-4">
-      <a href="https://github.com/watzon" class="text-teal-400 hover:underline"
+      <a href="https://github.com/watzon" class="text-teal-600 dark:text-teal-400 hover:underline"
         >GitHub</a
       >
-      <a href="https://watzonmanor.com/@watzon" class="text-teal-400 hover:underline"
+      <a href="https://watzonmanor.com/@watzon" class="text-teal-600 dark:text-teal-400 hover:underline"
         >Mastodon</a
       >
       <a
         href="https://linkedin.com/in/watzon1993"
-        class="text-teal-400 hover:underline">LinkedIn</a
+        class="text-teal-600 dark:text-teal-400 hover:underline">LinkedIn</a
       >
-      <a href="/blog" class="text-teal-400 hover:underline">Blog</a>
-      <a href="/resume" class="text-teal-400 hover:underline">Resume</a>
+      <a href="/blog" class="text-teal-600 dark:text-teal-400 hover:underline">Blog</a>
+      <a href="/resume" class="text-teal-600 dark:text-teal-400 hover:underline">Resume</a>
     </div>
   </section>
 </div>

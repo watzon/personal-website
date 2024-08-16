@@ -55,7 +55,7 @@
         <div>
           <h2 class="text-xl font-semibold">{method.title}</h2>
           {#if method.link}
-            <a href={method.link} class="text-teal-400 hover:underline"
+            <a href={method.link} class="text-teal-600 dark:text-teal-400 hover:underline"
               >{method.value}</a
             >
           {:else}
@@ -74,7 +74,7 @@
     <ul class="list-disc list-inside space-y-2">
       {#each otherLinks as link}
         <li>
-          <a href={link.link} class="text-teal-400 hover:underline"
+          <a href={link.link} class="text-teal-600 dark:text-teal-400 hover:underline"
             >{link.title}</a
           >
         </li>
@@ -93,7 +93,7 @@
         <div class="flex items-center space-x-2">
             <button
               title="Click to copy address to clipboard"
-              class="font-mono text-sm text-teal-400 hover:underline"
+              class="font-mono text-sm text-teal-600 dark:text-teal-400 hover:underline"
               onclick={() => copyToClipboard(crypto.address)}
             >
               {crypto.address}
