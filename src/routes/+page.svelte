@@ -45,7 +45,7 @@
   <section class="bg-neutral-300 dark:bg-gray-800 p-6 rounded-lg">
     <div class="flex items-start space-x-4">
       <img
-        src="/images/avatar.jpg"
+        src="/images/avatar.png"
         alt="Chris Watson"
         class="w-20 h-20 rounded-full"
       />
