@@ -30,9 +30,9 @@
       link: "https://github.com/watzon/paste69",
     },
     {
-      name: "WSL Proxy",
-      description: "WSL proxy files for editor/linux interop",
-      link: "https://github.com/watzon/wsl-proxy",
+      name: "Inkify",
+      description: "API based code screenshot service similar to carbon.now.sh",
+      link: "https://github.com/watzon/inkify",
     },
   ]);
 
