@@ -1,4 +1,6 @@
 <script>
+    import SvelteSeo from 'svelte-seo';
+
     import '../app.css';
     import { createDarkMode } from '$lib/stores/darkMode.svelte';
     import Sun from '$lib/icons/Sun.svelte';
@@ -7,6 +9,26 @@
     const { children } = $props();
     const darkMode = createDarkMode();
 </script>
+
+<SvelteSeo
+  title="Chris Watson - Senior Software Engineer - Salt Lake City, UT"
+  description="Welcome to my personal website. I'm Chris Watson, a seasoned software engineer, 3d printing content creator, and lover of open source focused on creating efficient, scalable, and user-friendly web applications. With over a decade of experience, I specialize in full-stack development and performance optimization."
+  openGraph={{
+    title: 'Chris Watson',
+    description: 'Senior Software Engineer - Salt Lake City, UT',
+    url: 'https://watzon.tech',
+    images: [
+      {
+        url: 'https://watzon.tech/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Chris Watson - Senior Software Engineer - Salt Lake City, UT',
+      },
+    ],
+    type: 'website',
+    site_name: 'watzon.tech',
+  }}
+/>
 
 <div class={`${darkMode.darkMode ? 'dark' : ''}`}>
     <div class={`min-h-screen dark:bg-gray-900 dark:text-gray-300 bg-gray-200 text-gray-800`}>

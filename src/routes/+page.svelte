@@ -6,8 +6,6 @@
   const props = $props();
   const { posts = [] }: { posts: Post[] } = props.data;
 
-  console.log(posts);
-
   let highlightedProjects = $state([
     {
       name: "Cadmium",
