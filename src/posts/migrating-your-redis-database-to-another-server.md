@@ -1,6 +1,7 @@
 ---
 date: 2023-10-17T18:53:50.702Z
 title: Migrating your Redis database to another server
+description: How to migrate your Redis database to another server
 tags:
   - databases
   - redis

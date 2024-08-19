@@ -1,5 +1,6 @@
 ---
 title: Rolling my own pastebin
+description: A look at the code for my own pastebin project, and why I'm not using 0x0.st
 date: 2024-01-03T22:41:33.691Z
 tags:
     - crystal

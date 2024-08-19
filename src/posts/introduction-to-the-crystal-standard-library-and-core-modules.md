@@ -1,6 +1,7 @@
 ---
 date: 2022-12-07T18:53:50.702Z
 title: An introduction to the Crystal standard library and its core modules
+description: A brief introduction to the Crystal standard library and its core modules for those new to the language
 tags:
   - crystal
   - programming

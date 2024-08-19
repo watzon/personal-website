@@ -1,5 +1,6 @@
 ---
 title: Facilitating Postgres database migration
+description: How to migrate your Postgres database to another server
 tags:
   - databases
   - devops

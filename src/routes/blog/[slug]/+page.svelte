@@ -10,8 +10,15 @@
 <!-- SEO -->
 <svelte:head>
   <title>{data.meta.title}</title>
+  <meta name="description" content={data.meta.description} />
+  <meta name="keywords" content={data.meta.tags.join(', ')} />
+
   <meta property="og:type" content="article" />
   <meta property="og:title" content={data.meta.title} />
+  <meta property="og:description" content={data.meta.description} />
+  <meta property="og:image" content={data.meta.thumbnail} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 </svelte:head>
 
 <article class="prose prose-xl dark:prose-invert">

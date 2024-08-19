@@ -1,5 +1,6 @@
 ---
 title: Using n8n to create a simple Mastodon bot
+description: How to use n8n to create a simple Mastodon bot
 date: 2023-12-09T23:53:19.889Z
 thumbnail: /images/uploads/using-n8n-to-create-a-simple-mastodon-bot.png
 tags:

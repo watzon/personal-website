@@ -1,5 +1,6 @@
 ---
 title: Run GitHub Actions locally and never have a failed deploy again
+description: How to run GitHub Actions locally and never have a failed deploy again
 date: 2022-07-01T16:15:44.093Z
 tags: []
 thumbnail: /images/uploads/run-github-actions-locally-and-never-have-a-failed-deploy-again.webp
