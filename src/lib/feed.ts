@@ -28,6 +28,7 @@ export async function generateFeed() {
             title: post.title,
             id: post.link,
             link: post.link,
+            content: post.description,
             author: [
                 {
                     name: 'Chris Watson',
