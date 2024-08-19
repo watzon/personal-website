@@ -5,4 +5,5 @@ export type Post = {
     tags: string[]
     thumbnail?: string
     link: string
+    slug: string
 }
