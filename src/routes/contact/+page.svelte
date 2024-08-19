@@ -20,7 +20,8 @@
     { title: "Mastodon", link: "https://watzonmanor.com/@watzon" },
     { title: "LinkedIn", link: "https://linkedin.com/in/watzon1993" },
     { title: "Blog", link: "/blog" },
-    { title: "RSS Feed", link: "/rss.xml" },
+    { title: "RSS Feed", link: "/blog/rss.xml" },
+    { title: "Atom Feed", link: "/blog/atom.xml" },
   ];
 
   const cryptoAddresses = [
