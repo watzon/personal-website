@@ -31,6 +31,9 @@
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
+
+  <!-- Umami -->
+  <script async src="https://analytics.watzon.tech/script.js" data-website-id="2641feab-38f1-4ce2-9162-2fc85e78b4bd"></script>
 </svelte:head>
 
 <div class={`${darkMode.darkMode ? 'dark' : ''}`}>
