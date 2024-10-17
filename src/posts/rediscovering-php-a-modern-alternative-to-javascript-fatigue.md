@@ -1,12 +1,12 @@
 ---
-date: 2024-10-17T18:53:50.702Z
-title: Rediscovering PHP: A Modern Alternative to JavaScript Fatigue
+title: "Rediscovering PHP: A Modern Alternative to JavaScript Fatigue"
 description: Analyzing the evolution of PHP, its impact on modern web development, and a comparison with JavaScript
 tags:
   - languages
   - php
   - javascript
   - programming
+date: 2024-10-17T13:20:00.702Z
 thumbnail: https://media.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F3ec0rz0x38tuofcikujn.jpeg
 ---
 
@@ -237,4 +237,4 @@ So, dust off your old perceptions, and give PHP another chance. You might be ple
 
 ---
 
-*Thank you for reading! If you have experiences with modern PHP or thoughts on the current state of JavaScript, feel free to share in the comments below.*
+_Thank you for reading! If you have experiences with modern PHP or thoughts on the current state of JavaScript, feel free to share in the comments below._
