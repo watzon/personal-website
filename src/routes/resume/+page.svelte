@@ -12,47 +12,47 @@
       company: "Impartner Software",
       period: "2022-02 - 2022-11 • Lehi, UT",
       description:
-        "During my tenure at Impartner Software, I focused on enhancing the company's partner relationship management (PRM) solutions. I worked on improving the scalability and performance of the core platform, implementing new features to streamline partner onboarding processes, and optimizing data synchronization between Impartner's PRM and clients' CRM systems.",
+        "During my tenure at Impartner Software, I focused on enhancing the company's partner relationship management (PRM) solutions. I worked on improving the scalability and performance of the core platform, and implemented new features to streamline partner onboarding processes and optimize data synchronization between Impartner's PRM and clients' CRM systems.",
     },
     {
       title: "Senior Software Engineer",
       company: "Purple",
       period: "2021-11 - 2022-02 • Lehi, UT",
       description:
-        "At Purple, I developed a crucial 'tag router' AWS Lambda function, effectively offloading hundreds of advertising tags from the client to the server. This innovation significantly enhanced client-side performance, improving load times and user experience on Purple's e-commerce platform. I also collaborated with the marketing team to implement more efficient tracking and analytics solutions.",
+        "At Purple, I developed a crucial 'tag router' AWS Lambda function, effectively offloading hundreds of advertising tags from the client to the server. This helped reduce page load times by as much as 400%, significantly enhancing client-side performance and user experience on Purple's e-commerce platform.",
     },
     {
       title: "Principle Software Engineer",
       company: "TruVision Health",
       period: "2020-08 - 2021-10 • Draper, UT",
       description:
-        "As the Principle Software Engineer at TruVision Health, I led a comprehensive optimization effort that resulted in a 600% increase in main site speed. This was achieved through a combination of server response time optimization, implementation of lazy loading techniques, and reduction of redundant JavaScript. I also played a key role in mentoring junior developers, significantly improving their coding skills and contributions to projects.",
+        "As the Principle Software Engineer at TruVision Health, I led a comprehensive optimization effort that resulted in a 600% increase in main site speed. I also played a key role in mentoring junior developers, significantly improving their coding skills and contributions to projects.",
     },
     {
       title: "Senior Software Engineer",
       company: "NeuraLegion",
       period: "2018-08 - 2019-11 • Remote",
       description:
-        "At NeuraLegion, I contributed to the development of advanced AI-powered security testing solutions. I worked on improving the accuracy and efficiency of automated vulnerability scanning tools, implemented new features for detecting complex web application vulnerabilities, and collaborated with the research team to incorporate the latest security threat intelligence into our products.",
+        "At NeuraLegion, I contributed to the development of advanced AI-powered security testing solutions. I personally developed the browser automation engine we used, which sped up attack surface scanning by as much as 50%. Additionally, I implemented new features for detecting complex web application vulnerabilities, and collaborated with the research team to incorporate the latest security threat intelligence into our products.",
     },
     {
       title: "Software Engineer",
       company: "Pando Development",
       period: "2016-10 - 2019-02 • Remote",
       description:
-        "During my time at Pando Development, I was involved in building robust file sharing and collaboration tools. I contributed to the development of a secure, distributed file system, implemented real-time collaboration features, and worked on optimizing large file transfer protocols to enhance user experience and system reliability.",
+        "During my time at Pando Development, I was involved in building robust file sharing and collaboration tools. I also worked on solutions for other clients, including building a Ruby on Rails based portal for a local mortuary.",
     },
     {
       title: "Associate Consultant",
       company: "Cloud Software LLC",
       period: "2016-02 - 2016-10 • Tempe, AZ",
       description:
-        "As an Associate Consultant at Cloud Software LLC, I provided technical expertise to clients transitioning to cloud-based solutions. I assisted in the migration of legacy systems to modern cloud platforms, developed custom integrations between various cloud services, and provided training to client teams on best practices for cloud architecture and security.",
+        "As an Associate Consultant at Cloud Software LLC, I was instrumental in saving key clients by transitioning their old client portal to newer technologies, such as Angular 2. I provided technical expertise, assisted in the migration of legacy systems to modern cloud platforms, and developed custom integrations between various cloud services.",
     },
     {
       title: "QA Engineer",
       company: "NUVI",
-      period: "2015-02 - 2015-08, Lindon, UT",
+      period: "2015-02 - 2015-08 • Lindon, UT",
       description:
         "At NUVI, I was responsible for ensuring the quality and reliability of social media analytics tools. I developed and executed comprehensive test plans, automated repetitive testing processes, and worked closely with developers to resolve identified issues. My efforts contributed to improving the overall stability and user satisfaction of NUVI's products.",
     },
@@ -85,6 +85,12 @@
     "CSS",
     "Tailwind",
     "Automation",
+    "Ruby",
+    "Ruby on Rails",
+    "PHP",
+    "Laravel",
+    "Python",
+    "UI/UX",
   ]);
 </script>
 
