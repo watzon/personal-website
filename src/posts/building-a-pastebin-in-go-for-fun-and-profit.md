@@ -1,7 +1,7 @@
 ---
 title: Building a Pastebin in Go for Fun and Profit
-description: Why would you want to build a pastebin in this day and age?
-date: 2024-11-13T09:30:00.000Z
+description: Most people probably don’t think about pastebins anymore. They came into existence long ago, when the internet was young as a way of sharing code snippets and other long form text in places like Usenet, IRC, and forums. That being said, those of us...
+date: 2024-11-13T13:30:00.000Z
 tags:
     - go
     - programming
