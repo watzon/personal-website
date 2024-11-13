@@ -41,7 +41,7 @@ I know what you're thinking. _"Paste69? Really?"_
 
 Yes, I am immature. Sue me.
 
-Paste69 is my attempt at creating an ubiquitous, open source pastebin for command line enthusiasts. Like 0x0, it features a simple and short URL, and an easily CURLable API. But unlike 0x0 the features don't stop there.
+**[Paste69](https://0x45.st)** is my attempt at creating an ubiquitous, open source pastebin for command line enthusiasts. Like 0x0, it features a simple and short URL, and an easily CURLable API. But unlike 0x0 the features don't stop there.
 
 Want to give it a try? It's as simple as:
 
