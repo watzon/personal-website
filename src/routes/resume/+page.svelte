@@ -94,6 +94,18 @@
   ]);
 </script>
 
+<svelte:head>
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://watzon.tech/resume">
+  <meta property="og:title" content="Chris Watson - Resume">
+  <meta property="og:description" content="View Chris Watson's resume, highlighting his experience as a Senior Software Engineer in Salt Lake City, UT">
+  <meta property="og:image" content="https://watzon.tech/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Chris Watson - Senior Software Engineer - Salt Lake City, UT">
+  <meta property="og:site_name" content="watzon.tech">
+</svelte:head>
+
 <div class="prose prose-xl dark:prose-invert">
   <section>
     <h2 class="!mt-0 !mb-2">Christopher Watson</h2>

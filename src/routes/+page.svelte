@@ -41,6 +41,18 @@
   });
 </script>
 
+<svelte:head>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://watzon.tech">
+  <meta property="og:title" content="Chris Watson">
+  <meta property="og:description" content="Senior Software Engineer - Salt Lake City, UT">
+  <meta property="og:image" content="https://watzon.tech/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Chris Watson - Senior Software Engineer - Salt Lake City, UT">
+  <meta property="og:site_name" content="watzon.tech">
+</svelte:head>
+
 <div class="space-y-8">
   <section class="bg-neutral-300 dark:bg-gray-800 p-6 rounded-lg">
     <div class="flex items-start space-x-4">

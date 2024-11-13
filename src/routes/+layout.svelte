@@ -11,17 +11,6 @@
 <svelte:head>
   <title>Chris Watson - Senior Software Engineer - Salt Lake City, UT</title>
   <meta name="description" content="Welcome to my personal website. I'm Chris Watson, a seasoned software engineer, 3d printing content creator, and lover of open source focused on creating efficient, scalable, and user-friendly web applications. With over a decade of experience, I specialize in full-stack development and performance optimization.">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://watzon.tech">
-  <meta property="og:title" content="Chris Watson">
-  <meta property="og:description" content="Senior Software Engineer - Salt Lake City, UT">
-  <meta property="og:image" content="https://watzon.tech/images/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Chris Watson - Senior Software Engineer - Salt Lake City, UT">
-  <meta property="og:site_name" content="watzon.tech">
 
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
