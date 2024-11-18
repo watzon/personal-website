@@ -63,4 +63,7 @@
             </footer>
         </div>
     </div>
+
+    <!-- Mastodon verification link -->
+    <a class="hidden" rel="me" href="https://tty0.social/@watzon">Mastodon</a>
 </div>
