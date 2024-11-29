@@ -106,7 +106,7 @@
   <meta property="og:site_name" content="watzon.tech">
 </svelte:head>
 
-<div class="prose prose-xl dark:prose-invert">
+<div class="prose prose-xl max-w-full dark:prose-invert">
   <section>
     <h2 class="!mt-0 !mb-2">Christopher Watson</h2>
     <h4 class="!mt-0 !mb-2">
@@ -145,7 +145,7 @@
   <section>
     <div class="flex flex-wrap gap-2 justify-center">
       {#each skills as skill}
-        <span class="bg-gray-700 text-teal-600 dark:text-teal-400 px-2 py-1 rounded text-lg"
+        <span class="bg-stone-300 dark:bg-gray-700 text-teal-700 dark:text-teal-400 px-2 py-1 rounded text-lg"
           >{skill}</span
         >
       {/each}
@@ -157,7 +157,7 @@
     {#each experiences as job}
       <div class="mb-6">
         <h3 class="text-xl font-semibold">{job.title} - {job.company}</h3>
-        <p class="text-lg text-gray-400 mb-2">{job.period}</p>
+        <p class="text-lg text-gray-500 dark:text-gray-300 mb-2">{job.period}</p>
         <p class="text-lg">{job.description}</p>
       </div>
     {/each}

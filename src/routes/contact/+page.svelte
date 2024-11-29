@@ -17,11 +17,12 @@
 
   const otherLinks = [
     { title: "GitHub", link: "https://github.com/watzon" },
-    { title: "Mastodon", link: "https://watzonmanor.com/@watzon" },
+    { title: "Mastodon", link: "https://tty0.social/@watzon" },
+    { title: "Bluesky", link: "https://bsky.app/profile/watzon.tech" },
     { title: "LinkedIn", link: "https://linkedin.com/in/watzon1993" },
     { title: "Blog", link: "/blog" },
-    { title: "RSS Feed", link: "/blog/rss.xml" },
-    { title: "Atom Feed", link: "/blog/atom.xml" },
+    { title: "RSS Feed", link: "/blog/rss.xml", rel: "external" },
+    { title: "Atom Feed", link: "/blog/atom.xml", rel: "external" },
   ];
 
   const cryptoAddresses = [
@@ -87,9 +88,13 @@
     <ul class="list-disc list-inside space-y-2">
       {#each otherLinks as link}
         <li>
-          <a href={link.link} class="text-teal-600 dark:text-teal-400 hover:underline"
-            >{link.title}</a
+          <a
+            href={link.link}
+            class="text-teal-600 dark:text-teal-400 hover:underline"
+            rel={link.rel}
           >
+            {link.title}
+          </a>
         </li>
       {/each}
     </ul>
