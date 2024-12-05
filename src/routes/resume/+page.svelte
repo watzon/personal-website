@@ -3,94 +3,127 @@
     {
       title: "Senior Software Engineer",
       company: "Ama Multimedia LLC",
-      period: "2023-03 - 2024-01 • Remote",
-      description:
-        "At Ama Multimedia, I spearheaded the creation of a unified Vue UI library, enhancing consistency across multiple product lines including streaming and content hosting sites. I successfully split a monolithic streaming application into separate user-facing and backend components, significantly improving maintainability and performance. Additionally, I refactored the JavaScript portion of a large Ruby on Rails application, resulting in a 50% reduction in build times.",
+      period: "2022-12 - 2024-03 • Remote",
+      description: "Led frontend architecture and development initiatives for multiple streaming and content hosting platforms.",
+      highlights: [
+        "Spearheaded the creation of a unified Vue UI library, enhancing consistency across multiple product lines",
+        "Split a monolithic streaming application into separate user-facing and backend components",
+        "Refactored JavaScript portion of a Ruby on Rails application, reducing build times by 50%"
+      ]
     },
     {
       title: "Senior Software Engineer",
       company: "Impartner Software",
       period: "2022-02 - 2022-11 • Lehi, UT",
-      description:
-        "During my tenure at Impartner Software, I focused on enhancing the company's partner relationship management (PRM) solutions. I worked on improving the scalability and performance of the core platform, and implemented new features to streamline partner onboarding processes and optimize data synchronization between Impartner's PRM and clients' CRM systems.",
+      description: "Enhanced and maintained partner relationship management (PRM) solutions focusing on scalability and performance.",
+      highlights: [
+        "Improved core platform scalability and performance",
+        "Implemented new features to streamline partner onboarding processes",
+        "Optimized data synchronization between PRM and client CRM systems"
+      ]
     },
     {
       title: "Senior Software Engineer",
       company: "Purple",
       period: "2021-11 - 2022-02 • Lehi, UT",
-      description:
-        "At Purple, I developed a crucial 'tag router' AWS Lambda function, effectively offloading hundreds of advertising tags from the client to the server. This helped reduce page load times by as much as 400%, significantly enhancing client-side performance and user experience on Purple's e-commerce platform.",
+      description: "Optimized e-commerce platform performance and user experience through innovative solutions.",
+      highlights: [
+        "Developed 'tag router' AWS Lambda function to offload advertising tags from client",
+        "Reduced page load times by 400% through server-side optimization",
+        "Enhanced client-side performance and user experience on Purple's e-commerce platform"
+      ]
     },
     {
       title: "Principle Software Engineer",
       company: "TruVision Health",
       period: "2020-08 - 2021-10 • Draper, UT",
-      description:
-        "As the Principle Software Engineer at TruVision Health, I led a comprehensive optimization effort that resulted in a 600% increase in main site speed. I also played a key role in mentoring junior developers, significantly improving their coding skills and contributions to projects.",
+      description: "Led technical initiatives and mentored development team while driving significant performance improvements.",
+      highlights: [
+        "Led optimization effort resulting in 600% increase in main site speed",
+        "Mentored junior developers and improved team coding practices",
+        "Implemented automated testing and deployment pipelines"
+      ]
     },
     {
       title: "Senior Software Engineer",
       company: "NeuraLegion",
       period: "2018-08 - 2019-11 • Remote",
-      description:
-        "At NeuraLegion, I contributed to the development of advanced AI-powered security testing solutions. I personally developed the browser automation engine we used, which sped up attack surface scanning by as much as 50%. Additionally, I implemented new features for detecting complex web application vulnerabilities, and collaborated with the research team to incorporate the latest security threat intelligence into our products.",
+      description: "Contributed to AI-powered security testing solutions with focus on automation and vulnerability detection.",
+      highlights: [
+        "Developed browser automation engine speeding up attack surface scanning by 50%",
+        "Implemented features for detecting complex web application vulnerabilities",
+        "Collaborated with research team to incorporate security threat intelligence"
+      ]
     },
     {
       title: "Software Engineer",
       company: "Pando Development",
       period: "2016-10 - 2019-02 • Remote",
-      description:
-        "During my time at Pando Development, I was involved in building robust file sharing and collaboration tools. I also worked on solutions for other clients, including building a Ruby on Rails based portal for a local mortuary.",
+      description: "Built robust file sharing and collaboration tools while delivering client solutions.",
+      highlights: [
+        "Developed core file sharing and collaboration platform features",
+        "Built Ruby on Rails based portal for local mortuary client",
+        "Implemented real-time collaboration features using WebSocket"
+      ]
     },
     {
       title: "Associate Consultant",
       company: "Cloud Software LLC",
       period: "2016-02 - 2016-10 • Tempe, AZ",
-      description:
-        "As an Associate Consultant at Cloud Software LLC, I was instrumental in saving key clients by transitioning their old client portal to newer technologies, such as Angular 2. I provided technical expertise, assisted in the migration of legacy systems to modern cloud platforms, and developed custom integrations between various cloud services.",
+      description: "Provided technical expertise for client portal modernization and cloud migration projects.",
+      highlights: [
+        "Transitioned legacy client portal to Angular 2",
+        "Assisted in migration of systems to modern cloud platforms",
+        "Developed custom integrations between cloud services"
+      ]
     },
     {
       title: "QA Engineer",
       company: "NUVI",
       period: "2015-02 - 2015-08 • Lindon, UT",
-      description:
-        "At NUVI, I was responsible for ensuring the quality and reliability of social media analytics tools. I developed and executed comprehensive test plans, automated repetitive testing processes, and worked closely with developers to resolve identified issues. My efforts contributed to improving the overall stability and user satisfaction of NUVI's products.",
+      description: "Ensured quality and reliability of social media analytics tools through comprehensive testing.",
+      highlights: [
+        "Developed and executed comprehensive test plans",
+        "Automated repetitive testing processes",
+        "Collaborated with developers to resolve identified issues"
+      ]
     },
     {
       title: "Web Developer",
       company: "Utah Valley University",
       period: "2014-08 - 2015-02 • Orem, UT",
-      description:
-        "As a Web Developer at Utah Valley University, I contributed to the maintenance and improvement of the university's web presence. I developed and updated various departmental websites, implemented responsive design principles to enhance mobile accessibility, and collaborated with content owners to ensure accurate and timely information updates across the university's web properties.",
+      description: "Maintained and improved university web presence while implementing modern design principles.",
+      highlights: [
+        "Updated departmental websites with responsive design",
+        "Enhanced mobile accessibility across university web properties",
+        "Collaborated with content owners for timely information updates"
+      ]
     },
   ]);
 
   const skills = $state([
-    "Docker",
-    "Git",
+    // Frontend
     "TypeScript",
-    "Go",
-    "Linux",
-    "DevOps",
-    "AWS",
-    "AI/ML",
-    "Documentation",
-    "Vue",
-    "Svelte",
+    "Vue.js",
     "React",
-    "Zig",
-    "Rust",
-    "Crystal",
-    "HTML5",
-    "CSS",
-    "Tailwind",
-    "Automation",
-    "Ruby",
+    "Svelte",
+    "Tailwind CSS",
+    
+    // Backend
     "Ruby on Rails",
-    "PHP",
-    "Laravel",
+    "Node.js",
+    "Go",
     "Python",
-    "UI/UX",
+    
+    // Infrastructure & DevOps
+    "AWS",
+    "Docker",
+    
+    // Core Competencies
+    "System Design",
+    "API Development",
+    "CI/CD",
+    "Performance Optimization"
   ]);
 </script>
 
@@ -104,7 +137,137 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Chris Watson - Senior Software Engineer - Salt Lake City, UT">
   <meta property="og:site_name" content="watzon.tech">
+  <style>
+    @page {
+      margin: 0.5in;
+      size: auto;
+      marks: none;
+    }
+    @media print {
+      html {
+        height: 100%;
+      }
+      body {
+        height: 100%;
+      }
+    }
+  </style>
 </svelte:head>
+
+<style>
+  @media print {
+    /* Hide navigation and other layout elements */
+    :global(header),
+    :global(footer),
+    :global(.dark-mode-toggle) {
+      display: none !important;
+    }
+
+    /* Reset background colors and text colors for printing */
+    :global(body),
+    :global(.dark),
+    :global(.dark .dark\:bg-gray-900),
+    :global(.bg-orange-50) {
+      background: white !important;
+      color: black !important;
+    }
+
+    /* Optimize layout for printing */
+    :global(.prose) {
+      max-width: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    /* Adjust text sizes for print */
+    h2 {
+      font-size: 24px !important;
+      margin-bottom: 4px !important;
+    }
+
+    h3 {
+      font-size: 20px !important;
+      margin-bottom: 4px !important;
+    }
+
+    h4 {
+      font-size: 16px !important;
+      margin-bottom: 4px !important;
+    }
+
+    p {
+      font-size: 14px !important;
+      line-height: 1.4 !important;
+      margin-bottom: 8px !important;
+    }
+
+    /* Improve skill tags layout */
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-start !important;
+      margin: 12px 0;
+    }
+
+    .skill-tag {
+      background: none !important;
+      border: none !important;
+      color: #333 !important;
+      padding: 2px 8px !important;
+      margin: 0 !important;
+      font-size: 12px !important;
+      position: relative;
+    }
+
+    .skill-tag:not(:last-child)::after {
+      content: "•";
+      position: absolute;
+      right: -4px;
+      color: #666;
+    }
+
+    /* Handle page breaks */
+    section {
+      page-break-inside: auto;
+    }
+
+    .job-item {
+      page-break-inside: avoid;
+      margin-bottom: 16px !important;
+    }
+
+    /* Format links for print */
+    a {
+      color: #333 !important;
+      text-decoration: none !important;
+    }
+
+    a[href^="http"]::after {
+      content: " (" attr(href) ")";
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* Hide decorative elements */
+    :global(.dark\:prose-invert) {
+      filter: none !important;
+    }
+
+    /* Style bullet points for print */
+    .highlights-list {
+      margin: 8px 0 0 0 !important;
+      padding-left: 20px !important;
+    }
+
+    .highlights-list li {
+      font-size: 13px !important;
+      line-height: 1.4 !important;
+      margin-bottom: 2px !important;
+      page-break-inside: avoid;
+    }
+  }
+</style>
 
 <div class="prose prose-xl max-w-full dark:prose-invert">
   <section>
@@ -143,9 +306,9 @@
   </section>
 
   <section>
-    <div class="flex flex-wrap gap-2 justify-center">
+    <div class="flex flex-wrap gap-2 justify-center skills-container">
       {#each skills as skill}
-        <span class="bg-stone-300 dark:bg-gray-700 text-teal-700 dark:text-teal-400 px-2 py-1 rounded text-lg"
+        <span class="bg-stone-300 dark:bg-gray-700 text-teal-700 dark:text-teal-400 px-2 py-1 rounded text-lg skill-tag"
           >{skill}</span
         >
       {/each}
@@ -155,10 +318,15 @@
   <section>
     <h3>Experience</h3>
     {#each experiences as job}
-      <div class="mb-6">
+      <div class="mb-6 job-item">
         <h3 class="text-xl font-semibold">{job.title} - {job.company}</h3>
         <p class="text-lg text-gray-500 dark:text-gray-300 mb-2">{job.period}</p>
         <p class="text-lg">{job.description}</p>
+        <ul class="highlights-list">
+          {#each job.highlights as highlight}
+            <li>{highlight}</li>
+          {/each}
+        </ul>
       </div>
     {/each}
   </section>
