@@ -3,7 +3,8 @@
     import { createDarkMode } from '$lib/stores/darkMode.svelte';
     import Sun from '$lib/icons/Sun.svelte';
     import Moon from '$lib/icons/Moon.svelte';
-  
+    import PixelFox from '$lib/components/PixelFox.svelte';
+
     const { children } = $props();
     const darkMode = createDarkMode();
 </script>
@@ -49,6 +50,7 @@
             <main class="py-8">
             {@render children()}
             </main>
+            <PixelFox />
             <footer class="mt-12 py-4 text-center text-sm text-gray-500">
             <p>
                 Copyright &copy; 2024 Christopher Watson. All opinions are my own and not representative
