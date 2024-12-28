@@ -22,8 +22,8 @@
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
 
-  <!-- Umami -->
-  <script async src="https://analytics.watzon.tech/script.js" data-website-id="2641feab-38f1-4ce2-9162-2fc85e78b4bd"></script>
+  <!-- Analytics -->
+  <script defer data-project="677078af07b3365ec84f783c" src="https://cdn.jsdelivr.net/gh/litlyx/litlyx-js/browser/litlyx.js"></script>
 </svelte:head>
 
 <div class={`${darkMode.darkMode ? 'dark' : ''}`}>
