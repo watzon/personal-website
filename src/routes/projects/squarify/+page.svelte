@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import UploadIcon from "$lib/icons/Upload.svelte";
 
     type PresetSize = (typeof sizeOptions)[number]["value"];
     type Size = PresetSize | number;
@@ -294,16 +295,30 @@
     }
 </script>
 
-<div class="container">
-    <h1>Create square images with custom backgrounds</h1>
-    <p class="subtitle">Fast and free.</p>
-    <p class="paste-hint">Allows pasting images from clipboard</p>
+<div
+    class:aspect-square={!!originalImage}
+    class:max-w-[600px]={!!originalImage}
+    class:p-0={!!originalImage}
+    class:border-none={!!originalImage}
+    class:rounded-lg={!!originalImage}
+    class="max-w-3xl px-4 my-8 mx-auto"
+>
+    <h1
+        class="text-center mb-2 font-semibold text-2xl text-gray-800 dark:text-gray-300"
+    >
+        Create square images with custom backgrounds
+    </h1>
+    <p class="text-center text-teal-700 dark:text-teal-400 mb-2">
+        Fast and free.
+    </p>
+    <p class="text-center text-gray-700 dark:text-gray-300 mb-8 text-sm">
+        Allows pasting images from clipboard
+    </p>
 
     <div
-        class="upload-zone"
+        class="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-2xl p-8 text-center cursor-pointer transition-all bg-orange-50 dark:bg-gray-800 min-h-[200px] flex items-center justify-center hover:border-teal-700 dark:hover:border-teal-400 hover:bg-orange-100 dark:hover:bg-gray-700"
         role="region"
         aria-label="Image upload dropzone"
-        class:active={dragActive}
         class:has-image={!!originalImage}
         ondragenter={handleDragEnter}
         ondragleave={handleDragLeave}
@@ -311,87 +326,97 @@
         ondrop={handleDrop}
     >
         {#if originalImage}
-            <canvas bind:this={previewCanvas} class="preview-canvas"></canvas>
+            <canvas
+                bind:this={previewCanvas}
+                class="w-full h-full object-contain"
+            ></canvas>
         {:else}
-            <div class="upload-content">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="17 8 12 3 7 8"></polyline>
-                    <line x1="12" y1="3" x2="12" y2="15"></line>
-                </svg>
+            <div
+                class="flex flex-col items-center gap-4 text-gray-700 dark:text-gray-300"
+            >
+                <UploadIcon />
                 <span>Drag and Drop</span>
                 <span>or</span>
-                <label class="upload-button">
+                <label
+                    class="bg-teal-700 dark:bg-teal-600 text-white px-6 py-3 rounded-lg cursor-pointer transition-all font-medium hover:bg-teal-800 dark:hover:bg-teal-700 hover:-translate-y-0.5"
+                >
                     Upload Image
                     <input
                         type="file"
                         accept="image/*"
                         onchange={handleFileSelect}
+                        class="hidden"
                     />
                 </label>
-                <span class="paste-text">or paste from clipboard (Ctrl+V)</span>
+                <span class="text-gray-700 dark:text-gray-300 text-sm"
+                    >or paste from clipboard (Ctrl+V)</span
+                >
             </div>
         {/if}
     </div>
 
     {#if originalImage}
-        <div class="controls">
-            <div class="size-info">
-                <div>
-                    Original: {originalSize.width} × {originalSize.height}
-                </div>
-            </div>
+        <div class="text-gray-700 dark:text-gray-300 text-sm text-center mt-2">
+            Original: {originalSize.width} × {originalSize.height}
+        </div>
 
-            <div class="control-group">
-                <label>Output Size</label>
-                <div class="size-options">
+        <div class="mt-8 flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+                <label
+                    for="output-size"
+                    class="text-teal-700 dark:text-teal-400 text-sm font-medium"
+                    >Output Size</label
+                >
+                <div id="output-size" class="flex gap-2 flex-wrap">
                     {#each sizeOptions as option}
                         <button
-                            class:active={squareSize === option.value}
+                            class="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer transition-all bg-orange-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm hover:border-teal-700 dark:hover:border-teal-400 hover:text-teal-700 dark:hover:text-teal-400 {squareSize ===
+                            option.value
+                                ? 'bg-teal-700 dark:bg-teal-600 border-teal-700 dark:border-teal-600 text-white'
+                                : ''}"
                             onclick={() => (squareSize = option.value)}
                         >
                             {option.label}
                         </button>
                     {/each}
-                    <div class="custom-size">
+                    <div class="relative flex items-center">
                         <input
                             type="number"
                             min="1"
                             step="1"
-                            class="custom-size-input"
-                            class:active={typeof squareSize === "number" &&
-                                !sizeOptions.find(
-                                    (opt) => opt.value === squareSize,
-                                )}
+                            class="w-28 px-4 py-2 pr-10 border border-gray-300 dark:border-gray-700 rounded-lg bg-orange-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm transition-all hover:border-teal-700 dark:hover:border-teal-400 hover:text-teal-700 dark:hover:text-teal-400 {typeof squareSize ===
+                                'number' &&
+                            !sizeOptions.find((opt) => opt.value === squareSize)
+                                ? 'bg-teal-700 dark:bg-teal-600 border-teal-700 dark:border-teal-600 text-white'
+                                : ''}"
                             value={typeof squareSize === "number"
                                 ? squareSize
                                 : customSize}
                             oninput={handleCustomSizeInput}
                             placeholder="Custom size"
                         />
-                        <span class="unit">px</span>
+                        <span
+                            class="absolute right-4 pointer-events-none text-inherit"
+                            >px</span
+                        >
                     </div>
                 </div>
             </div>
 
-            <div class="control-group">
-                <label for="background-color">Background Color</label>
-                <div id="background-color" class="color-options">
+            <div class="flex flex-col gap-2">
+                <label
+                    for="background-color"
+                    class="text-teal-700 dark:text-teal-400 text-sm font-medium"
+                    >Background Color</label
+                >
+                <div id="background-color" class="flex gap-3 flex-wrap">
                     {#each colorOptions as option}
                         <button
                             aria-label={option.label}
-                            class="color-swatch"
-                            class:active={backgroundColor === option.value}
+                            class="w-10 h-10 rounded-lg cursor-pointer transition-all border border-gray-300 dark:border-gray-700 hover:-translate-y-0.5 {backgroundColor ===
+                            option.value
+                                ? 'border-2 border-teal-700 dark:border-teal-400'
+                                : ''}"
                             onclick={() => (backgroundColor = option.value)}
                             style:background-color={option.value !==
                             "transparent"
@@ -403,14 +428,23 @@
                 </div>
             </div>
 
-            <div class="button-group">
-                <button class="cancel-button" onclick={resetForm}>
+            <div class="grid grid-cols-[auto_1fr_1fr] gap-4 mt-2">
+                <button
+                    class="px-6 py-3 rounded-lg cursor-pointer transition-all font-medium bg-red-600 text-white hover:bg-red-700 hover:-translate-y-0.5"
+                    onclick={resetForm}
+                >
                     Cancel
                 </button>
-                <button class="save-button" onclick={saveImage}>
+                <button
+                    class="px-3 py-3 rounded-lg cursor-pointer transition-all font-medium bg-teal-700 dark:bg-teal-600 text-white hover:bg-teal-800 dark:hover:bg-teal-700 hover:-translate-y-0.5"
+                    onclick={saveImage}
+                >
                     Save Image
                 </button>
-                <button class="copy-button" onclick={copyImage}>
+                <button
+                    class="px-3 py-3 rounded-lg cursor-pointer transition-all font-medium bg-orange-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-300 hover:border-teal-700 dark:hover:border-teal-400 hover:text-teal-700 dark:hover:text-teal-400 hover:-translate-y-0.5"
+                    onclick={copyImage}
+                >
                     Copy Image
                 </button>
             </div>
@@ -419,179 +453,13 @@
 </div>
 
 <style>
-    .container {
-        max-width: 800px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        font-size: 2rem;
-        color: #fff;
-    }
-
-    .subtitle {
-        text-align: center;
-        color: #5eead4;
-        margin-bottom: 0.5rem;
-    }
-
-    .paste-hint {
-        text-align: center;
-        color: #94a3b8;
-        margin-bottom: 2rem;
-        font-size: 0.875rem;
-    }
-
-    .upload-zone {
-        border: 2px dashed #334155;
-        border-radius: 1rem;
-        padding: 2rem;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        background: #0f172a;
-        min-height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .upload-zone.active {
-        border-color: #5eead4;
-        background: #1e293b;
-    }
-
-    .upload-zone.has-image {
-        padding: 0;
-        aspect-ratio: 1;
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        border: none;
-        border-radius: 0.5rem;
-        overflow: hidden;
-    }
-
-    .upload-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        color: #94a3b8;
-    }
-
-    .preview-canvas {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-
-    input[type="file"] {
-        display: none;
-    }
-
-    .upload-button {
-        background: #14b8a6;
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        font-weight: 500;
-    }
-
-    .upload-button:hover {
-        background: #0d9488;
-        transform: translateY(-1px);
-    }
-
-    .paste-text {
-        color: #94a3b8;
-        font-size: 0.875rem;
-    }
-
-    .controls {
-        margin-top: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .control-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .control-group label {
-        color: #5eead4;
-        font-size: 0.875rem;
-        font-weight: 500;
-    }
-
-    .size-info {
-        color: #94a3b8;
-        font-size: 0.875rem;
-    }
-
-    .size-options {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-    }
-
-    .size-options button {
-        padding: 0.5rem 1rem;
-        border: 1px solid #334155;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        background: #0f172a;
-        color: #94a3b8;
-        font-size: 0.875rem;
-    }
-
-    .size-options button:hover {
-        border-color: #5eead4;
-        color: #5eead4;
-    }
-
-    .size-options button.active {
-        background: #14b8a6;
-        border-color: #14b8a6;
-        color: white;
-    }
-
-    .color-options {
-        display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-    }
-
-    .color-swatch {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        border: 1px solid #334155;
-        position: relative;
-        box-sizing: border-box;
-    }
-
     /* Add checkered pattern for transparent swatch */
-    .color-swatch[title=""],
-    .color-swatch[title*="Transparent"] {
+    button[title*="Transparent"] {
         position: relative;
         background-color: #ffffff;
     }
 
-    .color-swatch[title=""]::before,
-    .color-swatch[title*="Transparent"]::before {
+    button[title*="Transparent"]::before {
         content: "";
         position: absolute;
         inset: 0;
@@ -608,110 +476,14 @@
         border-radius: 0.5rem;
     }
 
-    .color-swatch:hover {
-        transform: translateY(-1px);
-    }
-
-    .color-swatch.active {
-        border: 2px solid #5eead4;
-    }
-
-    .button-group {
-        display: grid;
-        grid-template-columns: auto 1fr 1fr;
-        gap: 1rem;
-        margin-top: 0.5rem;
-    }
-
-    .save-button,
-    .copy-button,
-    .cancel-button {
-        padding: 0.75rem;
-        border: none;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        transition: all 0.2s;
-        font-weight: 500;
-        color: white;
-    }
-
-    .cancel-button {
-        background: #dc2626;
-        padding: 0.75rem 1.5rem;
-    }
-
-    .cancel-button:hover {
-        background: #b91c1c;
-        transform: translateY(-1px);
-    }
-
-    .save-button {
-        background: #14b8a6;
-    }
-
-    .save-button:hover {
-        background: #0d9488;
-        transform: translateY(-1px);
-    }
-
-    .copy-button {
-        background: #0f172a;
-        border: 1px solid #334155;
-    }
-
-    .copy-button:hover {
-        border-color: #5eead4;
-        color: #5eead4;
-        transform: translateY(-1px);
-    }
-
-    .save-button,
-    .copy-button {
-        flex: 1;
-    }
-
-    .custom-size {
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
-
-    .custom-size-input {
-        width: 7rem;
-        padding: 0.5rem 2.5rem 0.5rem 1rem;
-        border: 1px solid #334155;
-        border-radius: 0.5rem;
-        background: #0f172a;
-        color: #94a3b8;
-        font-size: 0.875rem;
-        transition: all 0.2s;
-    }
-
-    .custom-size-input:hover {
-        border-color: #5eead4;
-        color: #5eead4;
-    }
-
-    .custom-size-input.active {
-        background: #14b8a6;
-        border-color: #14b8a6;
-        color: white;
-    }
-
-    .custom-size-input::-webkit-inner-spin-button,
-    .custom-size-input::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    .custom-size-input[type="number"] {
+    /* Remove number input spinners */
+    input[type="number"] {
         -moz-appearance: textfield;
     }
 
-    .custom-size .unit {
-        position: absolute;
-        right: 1rem;
-        color: inherit;
-        pointer-events: none;
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 </style>
