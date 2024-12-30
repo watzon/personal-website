@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
 
     type SizeOption = (typeof sizeOptions)[number];
-    type Size = SizeOption["value"];
+    type Size = SizeOption["value"] | number;
 
     let dragActive = $state(false);
     let imageFile = $state<File | null>(null);
@@ -10,6 +10,7 @@
     let backgroundColor = $state<string>("#000000");
     let originalSize = $state({ width: 0, height: 0 });
     let squareSize = $state<Size>("original");
+    let customSize = $state("800");
     let previewCanvas = $state<HTMLCanvasElement | null>(null);
 
     const sizeOptions = [
@@ -17,6 +18,7 @@
         { label: "256×256", value: 256 },
         { label: "512×512", value: 512 },
         { label: "1024×1024", value: 1024 },
+        { label: "Custom", value: "custom" as const },
     ] as const;
 
     const colorOptions = [
@@ -26,6 +28,7 @@
         { label: "Navy", value: "#0f172a" },
         { label: "Dark Navy", value: "#1e293b" },
         { label: "Teal", value: "#5eead4" },
+        { label: "Transparent", value: "transparent" },
     ] as const;
 
     // Watch for changes in the image, canvas, size, or background color
@@ -142,15 +145,29 @@
         // Clear previous content
         ctx.clearRect(0, 0, PREVIEW_SIZE, PREVIEW_SIZE);
 
+        // Draw checkered pattern for transparency
+        if (backgroundColor === "transparent") {
+            const squareSize = 10;
+            for (let i = 0; i < PREVIEW_SIZE; i += squareSize) {
+                for (let j = 0; j < PREVIEW_SIZE; j += squareSize) {
+                    ctx.fillStyle =
+                        (i + j) % (squareSize * 2) === 0
+                            ? "#ffffff"
+                            : "#e2e8f0";
+                    ctx.fillRect(i, j, squareSize, squareSize);
+                }
+            }
+        } else {
+            // Fill background
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, PREVIEW_SIZE, PREVIEW_SIZE);
+        }
+
         // Calculate the target square size for the actual output
         const targetSize = getTargetSize(originalImage, squareSize);
 
         // Calculate scale to fit the preview
         const scale = PREVIEW_SIZE / targetSize;
-
-        // Fill background
-        ctx.fillStyle = backgroundColor;
-        ctx.fillRect(0, 0, PREVIEW_SIZE, PREVIEW_SIZE);
 
         // Draw image
         const imageScale =
@@ -183,7 +200,7 @@
         if (!originalImage) return;
 
         const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
         if (!ctx) return;
 
         // Calculate the target square size
@@ -192,9 +209,11 @@
         canvas.width = targetSize;
         canvas.height = targetSize;
 
-        // Fill background
-        ctx.fillStyle = backgroundColor;
-        ctx.fillRect(0, 0, targetSize, targetSize);
+        if (backgroundColor !== "transparent") {
+            // Fill background
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, targetSize, targetSize);
+        }
 
         // Draw image
         const scale = Math.min(
@@ -265,6 +284,28 @@
         squareSize = "original";
         previewCanvas = null;
     }
+
+    function handleCustomSizeChange(e: Event) {
+        const input = e.target as HTMLInputElement;
+        const value = parseInt(input.value);
+        if (!isNaN(value) && value > 0) {
+            customSize = input.value;
+            if (squareSize === "custom") {
+                squareSize = value;
+            }
+        }
+    }
+
+    function handleSizeSelect(option: SizeOption["value"]) {
+        if (option === "custom") {
+            const value = parseInt(customSize);
+            if (!isNaN(value) && value > 0) {
+                squareSize = value;
+            }
+        } else {
+            squareSize = option;
+        }
+    }
 </script>
 
 <div class="container">
@@ -330,13 +371,28 @@
                 <div id="output-size" class="size-options">
                     {#each sizeOptions as option}
                         <button
-                            class:active={squareSize === option.value}
-                            onclick={() => (squareSize = option.value)}
+                            class:active={option.value === "custom"
+                                ? typeof squareSize === "number"
+                                : squareSize === option.value}
+                            onclick={() => handleSizeSelect(option.value)}
                         >
                             {option.label}
                         </button>
                     {/each}
                 </div>
+                {#if typeof squareSize === "number" || squareSize === "custom"}
+                    <div class="custom-size">
+                        <input
+                            type="number"
+                            min="1"
+                            step="1"
+                            value={customSize}
+                            onchange={handleCustomSizeChange}
+                            placeholder="Enter size in pixels"
+                        />
+                        <span class="unit">px</span>
+                    </div>
+                {/if}
             </div>
 
             <div class="control-group">
@@ -348,7 +404,10 @@
                             class="color-swatch"
                             class:active={backgroundColor === option.value}
                             onclick={() => (backgroundColor = option.value)}
-                            style:background-color={option.value}
+                            style:background-color={option.value !==
+                            "transparent"
+                                ? option.value
+                                : undefined}
                             title={option.label}
                         ></button>
                     {/each}
@@ -535,6 +594,31 @@
         box-sizing: border-box;
     }
 
+    /* Add checkered pattern for transparent swatch */
+    .color-swatch[title=""],
+    .color-swatch[title*="Transparent"] {
+        position: relative;
+        background-color: #ffffff;
+    }
+
+    .color-swatch[title=""]::before,
+    .color-swatch[title*="Transparent"]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(45deg, #e2e8f0 25%, transparent 25%),
+            linear-gradient(-45deg, #e2e8f0 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, #e2e8f0 75%),
+            linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+        background-size: 10px 10px;
+        background-position:
+            0 0,
+            0 5px,
+            5px -5px,
+            -5px 0;
+        border-radius: 0.5rem;
+    }
+
     .color-swatch:hover {
         transform: translateY(-1px);
     }
@@ -595,5 +679,33 @@
     .save-button,
     .copy-button {
         flex: 1;
+    }
+
+    .custom-size {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .custom-size input {
+        background: #0f172a;
+        border: 1px solid #334155;
+        color: #94a3b8;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        width: 120px;
+        font-size: 0.875rem;
+    }
+
+    .custom-size input:focus {
+        outline: none;
+        border-color: #5eead4;
+        color: white;
+    }
+
+    .custom-size .unit {
+        color: #94a3b8;
+        font-size: 0.875rem;
     }
 </style>
