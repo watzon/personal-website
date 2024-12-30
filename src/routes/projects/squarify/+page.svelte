@@ -1,8 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    type SizeOption = (typeof sizeOptions)[number];
-    type Size = SizeOption["value"] | number;
+    type PresetSize = (typeof sizeOptions)[number]["value"];
+    type Size = PresetSize | number;
 
     let dragActive = $state(false);
     let imageFile = $state<File | null>(null);
@@ -10,7 +10,7 @@
     let backgroundColor = $state<string>("#000000");
     let originalSize = $state({ width: 0, height: 0 });
     let squareSize = $state<Size>("original");
-    let customSize = $state("800");
+    let customSize = $state<number>(512);
     let previewCanvas = $state<HTMLCanvasElement | null>(null);
 
     const sizeOptions = [
@@ -18,7 +18,6 @@
         { label: "256×256", value: 256 },
         { label: "512×512", value: 512 },
         { label: "1024×1024", value: 1024 },
-        { label: "Custom", value: "custom" as const },
     ] as const;
 
     const colorOptions = [
@@ -115,10 +114,10 @@
     }
 
     function getTargetSize(image: HTMLImageElement, size: Size): number {
-        const targetSize =
-            size === "original" ? Math.max(image.width, image.height) : size;
-        console.log("Calculated target size:", { size, targetSize });
-        return targetSize;
+        if (size === "original") {
+            return Math.max(image.width, image.height);
+        }
+        return size;
     }
 
     function updatePreview() {
@@ -285,25 +284,12 @@
         previewCanvas = null;
     }
 
-    function handleCustomSizeChange(e: Event) {
+    function handleCustomSizeInput(e: Event) {
         const input = e.target as HTMLInputElement;
         const value = parseInt(input.value);
         if (!isNaN(value) && value > 0) {
-            customSize = input.value;
-            if (squareSize === "custom") {
-                squareSize = value;
-            }
-        }
-    }
-
-    function handleSizeSelect(option: SizeOption["value"]) {
-        if (option === "custom") {
-            const value = parseInt(customSize);
-            if (!isNaN(value) && value > 0) {
-                squareSize = value;
-            }
-        } else {
-            squareSize = option;
+            customSize = value;
+            squareSize = value;
         }
     }
 </script>
@@ -367,32 +353,35 @@
             </div>
 
             <div class="control-group">
-                <label for="output-size">Output Size</label>
-                <div id="output-size" class="size-options">
+                <label>Output Size</label>
+                <div class="size-options">
                     {#each sizeOptions as option}
                         <button
-                            class:active={option.value === "custom"
-                                ? typeof squareSize === "number"
-                                : squareSize === option.value}
-                            onclick={() => handleSizeSelect(option.value)}
+                            class:active={squareSize === option.value}
+                            onclick={() => (squareSize = option.value)}
                         >
                             {option.label}
                         </button>
                     {/each}
-                </div>
-                {#if typeof squareSize === "number" || squareSize === "custom"}
                     <div class="custom-size">
                         <input
                             type="number"
                             min="1"
                             step="1"
-                            value={customSize}
-                            onchange={handleCustomSizeChange}
-                            placeholder="Enter size in pixels"
+                            class="custom-size-input"
+                            class:active={typeof squareSize === "number" &&
+                                !sizeOptions.find(
+                                    (opt) => opt.value === squareSize,
+                                )}
+                            value={typeof squareSize === "number"
+                                ? squareSize
+                                : customSize}
+                            oninput={handleCustomSizeInput}
+                            placeholder="Custom size"
                         />
                         <span class="unit">px</span>
                     </div>
-                {/if}
+                </div>
             </div>
 
             <div class="control-group">
@@ -682,30 +671,47 @@
     }
 
     .custom-size {
+        position: relative;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
     }
 
-    .custom-size input {
-        background: #0f172a;
+    .custom-size-input {
+        width: 7rem;
+        padding: 0.5rem 2.5rem 0.5rem 1rem;
         border: 1px solid #334155;
-        color: #94a3b8;
-        padding: 0.5rem;
         border-radius: 0.5rem;
-        width: 120px;
+        background: #0f172a;
+        color: #94a3b8;
         font-size: 0.875rem;
+        transition: all 0.2s;
     }
 
-    .custom-size input:focus {
-        outline: none;
+    .custom-size-input:hover {
         border-color: #5eead4;
+        color: #5eead4;
+    }
+
+    .custom-size-input.active {
+        background: #14b8a6;
+        border-color: #14b8a6;
         color: white;
     }
 
+    .custom-size-input::-webkit-inner-spin-button,
+    .custom-size-input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .custom-size-input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
     .custom-size .unit {
-        color: #94a3b8;
-        font-size: 0.875rem;
+        position: absolute;
+        right: 1rem;
+        color: inherit;
+        pointer-events: none;
     }
 </style>
