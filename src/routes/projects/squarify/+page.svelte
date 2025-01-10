@@ -13,6 +13,7 @@
     let squareSize = $state<Size>("original");
     let customSize = $state<number>(512);
     let previewCanvas = $state<HTMLCanvasElement | null>(null);
+    let showWatermark = $state(true);
 
     const sizeOptions = [
         { label: "Original Size", value: "original" as const },
@@ -31,18 +32,24 @@
         { label: "Transparent", value: "transparent" },
     ] as const;
 
+    // Modify the effect to use a flag to prevent double rendering
+    let isUpdating = false;
+
     // Watch for changes in the image, canvas, size, or background color
     $effect(() => {
         const canvas = previewCanvas;
         const image = originalImage;
         const size = squareSize;
         const bg = backgroundColor;
+        const watermark = showWatermark;
 
-        console.log("Main effect running", { canvas, image, size, bg });
+        console.log("Main effect running", { canvas, image, size, bg, watermark });
 
-        if (image && canvas) {
+        if (image && canvas && !isUpdating) {
+            isUpdating = true;
             requestAnimationFrame(() => {
                 updatePreview();
+                isUpdating = false;
             });
         }
     });
@@ -194,6 +201,43 @@
         });
 
         ctx.drawImage(originalImage, x, y, width, height);
+
+        // Add watermark to preview (only once!)
+        addWatermark(ctx, PREVIEW_SIZE);
+    }
+
+    function addWatermark(ctx: CanvasRenderingContext2D, canvasSize: number) {
+        if (!showWatermark) return;
+        
+        const text = "wtz.nz/squarify";
+        const padding = Math.round(canvasSize * 0.03); // 3% padding
+        
+        ctx.save();
+        ctx.font = `${Math.round(canvasSize * 0.035)}px system-ui, sans-serif`; // 2.5% of canvas size
+        
+        // Choose text color based on background
+        if (backgroundColor === "transparent") {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+        } else {
+            // For light backgrounds use dark text, for dark backgrounds use light text
+            const isLightBackground = [
+                "#FFFFFF",
+                "#94a3b8",
+                "#5eead4"
+            ].includes(backgroundColor);
+            
+            ctx.fillStyle = isLightBackground 
+                ? "rgba(0, 0, 0, 0.6)" 
+                : "rgba(255, 255, 255, 0.6)";
+        }
+        
+        // Get text metrics
+        const metrics = ctx.measureText(text);
+        const x = canvasSize - metrics.width - padding;
+        const y = canvasSize - padding;
+        
+        // Draw text
+        ctx.fillText(text, x, y);
     }
 
     async function saveImage(): Promise<void> {
@@ -225,6 +269,9 @@
         const x = (targetSize - width) / 2;
         const y = (targetSize - height) / 2;
         ctx.drawImage(originalImage, x, y, width, height);
+
+        // Add watermark
+        addWatermark(ctx, targetSize);
 
         // Download image
         const link = document.createElement("a");
@@ -260,6 +307,9 @@
         const x = (targetSize - width) / 2;
         const y = (targetSize - height) / 2;
         ctx.drawImage(originalImage, x, y, width, height);
+
+        // Add watermark
+        addWatermark(ctx, targetSize);
 
         try {
             const blob = await new Promise<Blob>((resolve) =>
@@ -428,6 +478,18 @@
                 </div>
             </div>
 
+            <div class="flex items-center gap-2">
+                <label class="inline-flex items-center cursor-pointer">
+                    <input
+                        type="checkbox"
+                        bind:checked={showWatermark}
+                        class="sr-only peer"
+                    />
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+                    <span class="ms-3 text-sm font-medium text-gray-700 dark:text-gray-300">Add watermark</span>
+                </label>
+            </div>
+
             <div class="grid grid-cols-[auto_1fr_1fr] gap-4 mt-2">
                 <button
                     class="px-6 py-3 rounded-lg cursor-pointer transition-all font-medium bg-red-600 text-white hover:bg-red-700 hover:-translate-y-0.5"
@@ -479,6 +541,7 @@
     /* Remove number input spinners */
     input[type="number"] {
         -moz-appearance: textfield;
+        appearance: textfield;
     }
 
     input[type="number"]::-webkit-inner-spin-button,
