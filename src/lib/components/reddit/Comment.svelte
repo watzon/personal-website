@@ -12,11 +12,12 @@
     }
 
     const props = $props<{
-        comment: RedditComment;
+        comment: RedditComment & { level: number };
         darkMode?: boolean;
-        depth?: number;
-        upvoted?: string;
-        maxComments?: number;
+        voteState?: 'up' | 'down' | null;
+        onVote?: (vote: 'up' | 'down' | null) => void;
+        saved?: boolean;
+        onSave?: () => void;
     }>();
 
     const timeAgo = $derived(formatDistanceToNow(new Date(props.comment.created_utc * 1000), { addSuffix: true }));
@@ -121,97 +122,141 @@
     });
 </script>
 
-<div class="comment" class:dark={props.darkMode} style="margin-left: {(props.depth || 0) * 20}px">
-    <div class="metadata">
-        <span class="author">u/{props.comment.author}</span>
-        {#if props.comment.all_awardings?.length}
-            <span class="awards">
-                {#each props.comment.all_awardings as award}
-                    <img
-                        src={award.icon_url}
-                        alt={award.name}
-                        title={award.name}
-                        class="award-icon"
-                        width="16"
-                        height="16"
-                    />
-                    {#if award.count > 1}
-                        <span class="award-count">{award.count}</span>
+<div 
+    class="comment-container grid" 
+    class:dark={props.darkMode}
+    style="margin-left: {props.comment.level * 24}px"
+>
+    <div class="thread-line-container">
+        {#if props.comment.level > 0}
+            <div class="thread-line"></div>
+        {/if}
+    </div>
+    <div class="comment-content">
+        <div class="metadata">
+            <span class="author">u/{props.comment.author}</span>
+            {#if props.comment.all_awardings?.length}
+                <span class="awards">
+                    {#each props.comment.all_awardings as award}
+                        <img
+                            src={award.icon_url}
+                            alt={award.name}
+                            title={award.name}
+                            class="award-icon"
+                            width="16"
+                            height="16"
+                        />
+                        {#if award.count > 1}
+                            <span class="award-count">{award.count}</span>
+                        {/if}
+                    {/each}
+                </span>
+            {/if}
+            <span class="separator">•</span>
+            <span class="score">{props.comment.score + (props.voteState === 'up' ? 1 : props.voteState === 'down' ? -1 : 0)} points</span>
+            <span class="separator">•</span>
+            <span class="time">{timeAgo}</span>
+        </div>
+
+        <div class="body">
+            {#if loading && loadedContent.length === 0}
+                <div class="loading-placeholder">Loading content...</div>
+            {:else}
+                {#each loadedContent as part}
+                    {#if part.type === 'text'}
+                        {part.content}
+                    {:else if (part.type === 'image' || part.type === 'video') && part.base64}
+                        <div class="media-container">
+                            <img
+                                src={part.base64}
+                                alt="Comment media"
+                                loading="lazy"
+                                class="comment-image"
+                            />
+                        </div>
+                    {:else if part.type === 'image' || part.type === 'video'}
+                        <div class="media-container loading">
+                            <div class="loading-placeholder">Loading media...</div>
+                        </div>
                     {/if}
                 {/each}
-            </span>
-        {/if}
-        <span class="separator">•</span>
-        <span class="score">{props.comment.score} points</span>
-        <span class="separator">•</span>
-        <span class="time">{timeAgo}</span>
-    </div>
+            {/if}
+        </div>
 
-    <div class="body">
-        {#if loading && loadedContent.length === 0}
-            <div class="loading-placeholder">Loading content...</div>
-        {:else}
-            {#each loadedContent as part}
-                {#if part.type === 'text'}
-                    {part.content}
-                {:else if (part.type === 'image' || part.type === 'video') && part.base64}
-                    <div class="media-container">
-                        <img
-                            src={part.base64}
-                            alt="Comment media"
-                            loading="lazy"
-                            class="comment-image"
-                        />
-                    </div>
-                {:else if part.type === 'image' || part.type === 'video'}
-                    <div class="media-container loading">
-                        <div class="loading-placeholder">Loading media...</div>
-                    </div>
-                {/if}
-            {/each}
-        {/if}
+        <div class="actions">
+            <button 
+                class="action-button vote-button" 
+                class:active={props.voteState === 'up'}
+                onclick={() => props.onVote?.(props.voteState === 'up' ? null : 'up')}
+            >
+                ▲
+            </button>
+            <button 
+                class="action-button vote-button"
+                class:active={props.voteState === 'down'}
+                onclick={() => props.onVote?.(props.voteState === 'down' ? null : 'down')}
+            >
+                ▼
+            </button>
+            <button class="action-button">
+                💬 Reply
+            </button>
+            <button class="action-button">
+                ↗️ Share
+            </button>
+            <button 
+                class="action-button save-button" 
+                class:saved={props.saved}
+                onclick={() => props.onSave?.()}
+            >
+                {props.saved ? '⭐' : '☆'} {props.saved ? 'Saved' : 'Save'}
+            </button>
+            <button class="action-button">
+                ••• More
+            </button>
+        </div>
     </div>
-
-    <div class="actions">
-        <button class="action-button" class:upvoted={props.upvoted && props.comment.id === props.upvoted}>
-            ▲
-        </button>
-        <button class="action-button">
-            ▼
-        </button>
-        <button class="action-button">
-            💬 Reply
-        </button>
-        <button class="action-button">
-            ↗️ Share
-        </button>
-        <button class="action-button">
-            ⭐ Save
-        </button>
-        <button class="action-button">
-            ••• More
-        </button>
-    </div>
-
-    {#if props.comment.replies}
-        {#each props.comment.replies as reply}
-            <Self comment={reply} darkMode={props.darkMode} depth={(props.depth || 0) + 1} upvoted={props.upvoted} />
-        {/each}
-    {/if}
 </div>
 
 <style>
-    .comment {
-        padding: 0.5rem 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        border-left: 2px solid #edeff1;
+    .comment-container {
+        display: grid;
+        grid-template-columns: 24px minmax(0, 1fr);
+        position: relative;
         margin-top: 0.5rem;
-        padding-left: 1rem;
     }
 
-    .comment.dark {
-        color: #d7dadc;
-        border-left-color: #343536;
+    .thread-line-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .thread-line {
+        position: absolute;
+        left: 50%;
+        top: -8px; /* Start slightly below the parent comment */
+        height: calc(100% - 8px); /* Stop at the current comment's top */
+        width: 2px;
+        transform: translateX(-50%);
+        background-color: rgba(135, 138, 140, 0.1); /* More subtle color */
+        cursor: pointer;
+    }
+
+    .thread-line:hover {
+        background-color: rgba(135, 138, 140, 0.3);
+    }
+
+    .dark .thread-line {
+        background-color: rgba(215, 218, 220, 0.1);
+    }
+
+    .dark .thread-line:hover {
+        background-color: rgba(215, 218, 220, 0.3);
+    }
+
+    .comment-content {
+        padding: 4px 0 0.5rem;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
     .metadata {
@@ -380,5 +425,41 @@
 
     .dark .loading {
         background: rgba(255, 255, 255, 0.05);
+    }
+
+    .vote-button {
+        font-size: 1.25rem;
+        line-height: 1;
+        padding: 2px 8px;
+        transition: color 0.2s ease;
+    }
+
+    .vote-button:hover {
+        background: none;
+    }
+
+    .vote-button.active {
+        color: #ff4500;
+    }
+
+    .vote-button:hover:not(.active) {
+        color: #ff4500;
+    }
+
+    .vote-button.active:nth-child(2),
+    .vote-button:nth-child(2):hover:not(.active) {
+        color: #7193ff;
+    }
+
+    .save-button {
+        transition: color 0.2s ease;
+    }
+
+    .save-button.saved {
+        color: #ff4500;
+    }
+
+    .dark .save-button.saved {
+        color: #ff4500;
     }
 </style> 

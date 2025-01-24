@@ -147,6 +147,7 @@ export interface RedditComment {
     subreddit_name_prefixed: string;
     created: number;
     created_utc: number;
+    level?: number;  // Added for flattened comment tree structure
     
     // Content
     body: string;

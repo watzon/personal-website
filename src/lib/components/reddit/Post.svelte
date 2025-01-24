@@ -6,6 +6,10 @@
     const props = $props<{
         post: RedditPost;
         darkMode?: boolean;
+        voteState?: 'up' | 'down' | null;
+        onVote?: (vote: 'up' | 'down' | null) => void;
+        saved?: boolean;
+        onSave?: () => void;
     }>();
 
     const timeAgo = $derived(formatDistanceToNow(new Date(props.post.created_utc * 1000), { addSuffix: true }));
@@ -89,11 +93,19 @@
 <div class="reddit-post" class:dark={props.darkMode}>
     <!-- Vote buttons -->
     <div class="vote-buttons">
-        <button class="upvote">
+        <button 
+            class="upvote" 
+            class:active={props.voteState === 'up'}
+            onclick={() => props.onVote?.(props.voteState === 'up' ? null : 'up')}
+        >
             ▲
         </button>
-        <span class="score">{props.post.score}</span>
-        <button class="downvote">
+        <span class="score">{props.post.score + (props.voteState === 'up' ? 1 : props.voteState === 'down' ? -1 : 0)}</span>
+        <button 
+            class="downvote"
+            class:active={props.voteState === 'down'}
+            onclick={() => props.onVote?.(props.voteState === 'down' ? null : 'down')}
+        >
             ▼
         </button>
     </div>
@@ -169,8 +181,12 @@
             <button class="action-button">
                 ↗️ Share
             </button>
-            <button class="action-button">
-                ⭐ Save
+            <button 
+                class="action-button save-button" 
+                class:saved={props.saved}
+                onclick={() => props.onSave?.()}
+            >
+                {props.saved ? '⭐' : '☆'} {props.saved ? 'Saved' : 'Save'}
             </button>
             <button class="action-button">
                 ••• More
@@ -373,5 +389,48 @@
 
     .dark .award-count {
         color: #818384;
+    }
+
+    .upvote, .downvote {
+        border: none;
+        background: none;
+        cursor: pointer;
+        padding: 2px;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: #878a8c;
+        transition: color 0.2s ease;
+    }
+
+    .dark .upvote, .dark .downvote {
+        color: #818384;
+    }
+
+    .upvote:hover {
+        color: #ff4500;
+    }
+
+    .downvote:hover {
+        color: #7193ff;
+    }
+
+    .upvote.active {
+        color: #ff4500;
+    }
+
+    .downvote.active {
+        color: #7193ff;
+    }
+
+    .save-button {
+        transition: color 0.2s ease;
+    }
+
+    .save-button.saved {
+        color: #ff4500;
+    }
+
+    .dark .save-button.saved {
+        color: #ff4500;
     }
 </style> 
