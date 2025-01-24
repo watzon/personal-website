@@ -133,7 +133,10 @@
         {/if}
 
         {#if imageData}
-            <div class="media-container" class:loading>
+            <div 
+                class="media-container" 
+                class:loading
+            >
                 {#if base64Image}
                     <img
                         src={base64Image}
@@ -304,7 +307,8 @@
         margin: 0.5rem 0;
         border-radius: 4px;
         overflow: hidden;
-        max-height: 512px;
+        width: 100%;
+        height: 512px; /* Fixed height */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -339,11 +343,9 @@
 
     .post-image {
         max-width: 100%;
+        max-height: 100%;
+        width: auto;
         height: auto;
-        max-height: 512px;
-        object-fit: contain;
-        opacity: 1;
-        transition: opacity 0.2s ease-in-out;
     }
 
     .post-video {
