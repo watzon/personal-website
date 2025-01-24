@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { RedditComment } from "$lib/types/reddit";
     import { formatDistanceToNow } from "date-fns";
-    import { processMediaUrl } from "$lib/utils";
+    import { processMediaUrl, urlToBase64 } from "$lib/utils";
     import Self from './Comment.svelte';
 
     interface ContentPart {
@@ -20,23 +20,6 @@
     }>();
 
     const timeAgo = $derived(formatDistanceToNow(new Date(props.comment.created_utc * 1000), { addSuffix: true }));
-
-    // Add base64 conversion utility
-    async function urlToBase64(url: string): Promise<string | undefined> {
-        try {
-            const response = await fetch(url);
-            const blob = await response.blob();
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onloadend = () => resolve(reader.result as string);
-                reader.onerror = reject;
-                reader.readAsDataURL(blob);
-            });
-        } catch (error) {
-            console.error('Failed to convert image to base64:', error);
-            return undefined;
-        }
-    }
 
     // Store for loaded content
     let loadedContent = $state<ContentPart[]>([]);

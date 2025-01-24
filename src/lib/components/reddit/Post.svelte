@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { MediaSize, RedditPost } from "$lib/types/reddit";
     import { formatDistanceToNow } from "date-fns";
-    import { processMediaUrl } from "$lib/utils";
+    import { processMediaUrl, urlToBase64 } from "$lib/utils";
 
     const props = $props<{
         post: RedditPost;
@@ -9,23 +9,6 @@
     }>();
 
     const timeAgo = $derived(formatDistanceToNow(new Date(props.post.created_utc * 1000), { addSuffix: true }));
-
-    // Add base64 conversion utility
-    async function urlToBase64(url: string): Promise<string | undefined> {
-        try {
-            const response = await fetch(url);
-            const blob = await response.blob();
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onloadend = () => resolve(reader.result as string);
-                reader.onerror = reject;
-                reader.readAsDataURL(blob);
-            });
-        } catch (error) {
-            console.error('Failed to convert image to base64:', error);
-            return undefined;
-        }
-    }
 
     // Get the best image to display
     const imageData = $derived.by(() => {

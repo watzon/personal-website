@@ -105,3 +105,22 @@ export async function getPosts() {
 
 	return posts
 }
+
+// Add utility function to proxy image URLs
+export async function urlToBase64(url: string): Promise<string | undefined> {
+	try {
+		// Use our own API endpoint to proxy the image request
+		const proxyUrl = `/api/proxy-image?url=${encodeURIComponent(url)}`;
+		const response = await fetch(proxyUrl);
+		const blob = await response.blob();
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onloadend = () => resolve(reader.result as string);
+			reader.onerror = reject;
+			reader.readAsDataURL(blob);
+		});
+	} catch (error) {
+		console.error('Failed to convert image to base64:', error);
+		return undefined;
+	}
+}
