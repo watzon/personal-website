@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { MediaSize, RedditPost } from "$lib/types/reddit";
+    import type { MediaSize, GalleryMediaSize, RedditPost } from "$lib/types/reddit";
     import { formatDistanceToNow } from "date-fns";
     import { processMediaUrl, urlToBase64 } from "$lib/utils";
 
@@ -13,6 +13,35 @@
     // Get the best image to display
     const imageData = $derived.by(() => {
         const post = props.post;
+        
+        // Handle gallery posts
+        if (post.gallery_data && post.media_metadata) {
+            // Get the first image from the gallery
+            const firstItem = post.gallery_data.items[0];
+            if (firstItem) {
+                const metadata = post.media_metadata[firstItem.media_id];
+                if (metadata && metadata.p) {
+                    // Find the best resolution that's not too large
+                    const bestResolution = metadata.p
+                        .filter((r: GalleryMediaSize) => r.x <= 800)
+                        .sort((a: GalleryMediaSize, b: GalleryMediaSize) => b.x - a.x)[0];
+
+                    if (bestResolution) {
+                        const processed = processMediaUrl(bestResolution.u);
+                        if (processed) {
+                            return {
+                                width: bestResolution.x,
+                                height: bestResolution.y,
+                                url: processed.url
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        // Handle regular posts with preview
         if (!post.preview?.images[0]) return null;
 
         const image = post.preview.images[0];

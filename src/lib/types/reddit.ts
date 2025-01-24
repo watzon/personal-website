@@ -130,6 +130,9 @@ export interface RedditPost {
     send_replies: boolean;
     report_reasons: string[] | null;
     treatment_tags: string[];
+    
+    // Gallery Data
+    gallery_data?: GalleryData;
 }
 
 // Comment Structure (t1)
@@ -233,15 +236,25 @@ export interface MediaEmbed {
 }
 
 export interface MediaMetadata {
-    [key: string]: {
-        status: "valid" | "invalid";
-        id: string;
-        e: "Image" | "AnimatedImage";
-        m: "image/jpeg" | "image/png" | "image/gif";
-        p: MediaSize[];
-        s: MediaSize;
-        ext?: string;
-    };
+    status: string;
+    e: string;
+    m: string;
+    p: GalleryMediaSize[];
+    s: GalleryMediaSize;
+    id: string;
+}
+
+export interface GalleryMediaSize {
+    y: number;
+    x: number;
+    u: string;
+}
+
+export interface GalleryData {
+    items: {
+        media_id: string;
+        id: number;
+    }[];
 }
 
 // Flair Types

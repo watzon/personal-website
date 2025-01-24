@@ -71,6 +71,8 @@
             const cleanedUrl = cleanRedditUrl(url);
             redditData = await fetchRedditData(cleanedUrl, maxComments);
 
+            console.log(redditData)
+
             // Wait for the next tick to ensure components are rendered
             await new Promise(resolve => setTimeout(resolve, 100));
 
@@ -230,7 +232,6 @@
             >
                 <Post post={redditData.post} {darkMode} />
                 {#each redditData.comments as comment}
-                {console.log(upvotedCommentId)}
                     <Comment 
                         {comment} 
                         {darkMode}

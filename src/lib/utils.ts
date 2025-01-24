@@ -108,6 +108,7 @@ export async function getPosts() {
 
 // Add utility function to proxy image URLs
 export async function urlToBase64(url: string): Promise<string | undefined> {
+	console.log(url)
 	try {
 		// Use our own API endpoint to proxy the image request
 		const proxyUrl = `/api/proxy-image?url=${encodeURIComponent(url)}`;
