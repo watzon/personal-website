@@ -2,6 +2,80 @@ import type { Post } from "./types"
 
 type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
 
+export function processMediaUrl(url: string): { type: 'image' | 'video', url: string } | null {
+	// Handle Reddit's inline GIF format (e.g., "giphy|uXbXCQ9c3irpC|downsized")
+	if (!url.startsWith('http')) {
+		const parts = url.split('|');
+		if (parts.length === 3) {
+			const [provider, id] = parts;
+			switch (provider) {
+				case 'giphy':
+					return {
+						type: 'image',
+						url: `https://i.giphy.com/${id}.gif`
+					};
+				// Add other providers as needed
+			}
+		}
+		return null;
+	}
+	
+	// Decode HTML entities
+	const txt = document.createElement("textarea");
+	txt.innerHTML = url;
+	url = txt.value;
+
+	// Reddit image handling
+	if (url.includes('preview.redd.it') || url.includes('external-preview.redd.it')) {
+		// Keep external previews as is
+		if (url.includes('external-preview.redd.it')) {
+			return {
+				type: 'image',
+				url
+			};
+		}
+		// Handle regular previews
+		return {
+			type: 'image',
+			url: url.replace('preview.redd.it', 'i.redd.it').split('?')[0]
+		};
+	}
+
+	// Imgur handling
+	if (url.includes('imgur.com')) {
+		// Convert gallery URLs to direct image URLs
+		if (url.includes('imgur.com/gallery/') || url.includes('imgur.com/a/')) {
+			return null; // Skip galleries for now
+		}
+		// Convert regular imgur URLs to direct URLs
+		if (!url.includes('i.imgur.com')) {
+			url = url.replace('imgur.com', 'i.imgur.com');
+			if (!url.match(/\.(jpg|jpeg|png|gif)$/i)) {
+				url += '.jpg';
+			}
+		}
+		return { type: 'image', url };
+	}
+
+	// Gfycat handling
+	if (url.includes('gfycat.com')) {
+		const gfyId = url.split('/').pop()?.split('-')[0];
+		if (gfyId) {
+			return {
+				type: 'video',
+				url: `https://thumbs.gfycat.com/${gfyId}-size_restricted.gif`
+			};
+		}
+	}
+
+	// Direct image URL handling
+	if (url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+		return { type: 'image', url };
+	}
+
+	return null;
+}
+
 // Format a date that looks like "2023-10-18T13:39:00.000Z" as a human-readable date
 export function formatDate(date: string, dateStyle: DateStyle = 'medium', locales = 'en') {
 	const dateTime = new Date(date)

@@ -16,11 +16,13 @@
   let isTransitioning = $state(false);
 
   function handleKeyDown(e: KeyboardEvent) {
+    if (!e.key || e.key === ' ') return;
     keys.add(e.key.toLowerCase());
     updateLastInteraction();
   }
 
   function handleKeyUp(e: KeyboardEvent) {
+    if (!e.key || e.key === ' ') return;
     keys.delete(e.key.toLowerCase());
   }
 
